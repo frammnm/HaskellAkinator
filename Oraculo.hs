@@ -77,7 +77,7 @@ obtenerCadena x y = fst (obtenerCadena' x y 0)
 
 x = obtenerCadena (crearPregunta "Una Pregunta?" 
 								(crearPregunta "Blah1" 
-									(crearPrediccion "Blah1.1") 
+									(crearPrediccion "Blah1.11") 
 									(crearPregunta "Blah1.2" 
 										(crearPrediccion "Blah1.2.1") 
 										(crearPrediccion "Nada")
