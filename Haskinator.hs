@@ -55,14 +55,21 @@ predecir maybeOraculo = case maybeOraculo of
                                                                                                  -- crearPregunta nuevaPreg nuevaPred (Prediccion pred) 
                                                                                                  -- let padre = obtenerNodo orc (obtenerCadena orc pred 
                                                                                                  putStrLn " Aqui aun no se termina "  
-imprimirOraculo :: Oraculo -> String
-imprimirOraculo ( Predecir xs ) = prediccion ( Predecir xs ) 
-imprimirOraculo ( Pregunta xs opos oneg ) = "Pregunta: "++ xs ++ "\n  Oraculo positivo: " ++ imprimirOraculo opos ++ "\n  Oraculo negativo: " ++ imprimirOraculo oneg   
+                                                                                                 
+                                                                              
+calcularEspacio :: Int -> String                                                                               
+calcularEspacio 0 = ""  
+calcularEspacio 1 = "  " 
+calcularEspacio n = "  " ++ calcularEspacio (n-1) 
+
+imprimirOraculo :: Oraculo -> Int -> String
+imprimirOraculo ( Predecir xs ) n  =  
+imprimirOraculo ( Pregunta xs opos oneg ) n =  (calcularEspacio n ) ++ "Pregunta: "++ xs ++ "\n" ++  (calcularEspacio n ) ++ "Oraculo positivo: " ++ (imprimirOraculo opos n+1)  ++ "\n" ++  (calcularEspacio n ) ++ "Oraculo negativo: " ++ (imprimirOraculo oneg n+1)  
 
 persistir :: Maybe Oraculo -> String                             
 persistir Nothing _  = putStrLn " Tratando de guardar un Oraculo vacio " 
 persistir ( Just orc ) name = do handle <- openFile name WriteMode 
-                                 hPutStr handle ( imprimirOraculo orc )
+                                 hPutStr handle ( imprimirOraculo orc 0 )
                                  
                                  
 
