@@ -5,7 +5,7 @@
 --    - Gabriel Alvarez    09-10029
 
 module Oraculo 
-( Oraculo 
+( Oraculo (..)  
 , crearPrediccion  
 , crearPregunta  
 , prediccion  
