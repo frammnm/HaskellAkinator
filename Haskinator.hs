@@ -8,7 +8,7 @@
 import Data.Char
 import Data.Maybe
 import Control.Monad
-import Oraculo
+import Oráculo
 
 crearOráculo :: Maybe Oráculo
 crearOráculo = Nothing
@@ -68,19 +68,19 @@ calcularEspacio 0 = ""
 calcularEspacio 1 = "  "
 calcularEspacio n = "  " ++ calcularEspacio (n - 1)
 
-imprimirOraculo :: Oráculo -> Int -> String
-imprimirOraculo (Predecir xs) n =
-imprimirOraculo (Pregunta xs opos oneg) n
+imprimirOráculo :: Oráculo -> Int -> String
+imprimirOráculo (Predecir xs) n =
+imprimirOráculo (Pregunta xs opos oneg) n
   =  calcularEspacio n ++ "Pregunta: " ++ xs++ "\n"
-  ++ calcularEspacio n ++ "Oráculo positivo: " ++ imprimirOraculo opos (n + 1) ++ "\n"
-  ++ calcularEspacio n ++ "Oráculo negativo: " ++ imprimirOraculo oneg (n + 1)
+  ++ calcularEspacio n ++ "Oráculo positivo: " ++ imprimirOráculo opos (n + 1) ++ "\n"
+  ++ calcularEspacio n ++ "Oráculo negativo: " ++ imprimirOráculo oneg (n + 1)
 
 persistir :: Maybe Oráculo -> String
 persistir Nothing _  = putStrLn "Tratando de guardar un oráculo vacío"
 persistir (Just orc) name
   = do
     handle <- openFile name WriteMode
-    hPutStr handle $ imprimirOraculo orc 0
+    hPutStr handle $ imprimirOráculo orc 0
     -- FIXME: No estás cerrando el archivo!  Usa simplemente «writeFile» en vez de «openFile» y escritura por separado!
 
 obtenerPosición :: [(Bool, String)] -> [(Bool, String)] -> Int
@@ -99,8 +99,8 @@ consultarPreguntaCrucial preg1 preg2 maybeorc
         resp2 = obtenerCadena orc preg2
       in -- Te faltaba este «in».
         case (resp1, resp2) of
-          (Nothing, _      ) -> " Consulta inválida, la primera pregunta no existe"
-          (_      , Nothing) -> " Consulta inválida, la segunda pregunta no existe"
+          (Nothing, _      ) -> "Consulta inválida, la primera pregunta no existe"
+          (_      , Nothing) -> "Consulta inválida, la segunda pregunta no existe"
           (Just r1, Just r2) -> snd (r1 !! obtenerPosicion r1 r2)
 
 main = forever $ do
@@ -110,9 +110,9 @@ main = forever $ do
   putStrLn " 3. Persistir"
   putStrLn " 4. Cargar"
   putStrLn " 5. Consultar pregunta crucial"
-  putStrLn " 6. Consultar estadsticas"
-  op <-getLine 
-  let oraculoPrincipal = crearOraculo 
+  putStrLn " 6. Consultar estadísticas"
+  op <- getLine
+  let oráculoPrincipal = crearOráculo 
   case op of 
     "1" -> putStrLn "1"
     "2" -> putStrLn "2"
@@ -120,4 +120,4 @@ main = forever $ do
     "4" -> putStrLn "4"
     "5" -> putStrLn "5"
     "6" -> putStrLn "6"
-    other -> putStrLn "No es una opcion valida."
+    other -> putStrLn "No es una opción válida."
