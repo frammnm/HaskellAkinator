@@ -78,13 +78,26 @@ imprimirOraculo :: Oraculo -> Int -> String
 imprimirOraculo ( Prediccion xs ) n  =  xs 
 imprimirOraculo ( Pregunta xs opos oneg ) n =  (calcularEspacio n ) ++ "Pregunta: "++ xs ++ "\n" ++  (calcularEspacio n ) ++ "Oraculo positivo: " ++ (imprimirOraculo opos n+1)  ++ "\n" ++  (calcularEspacio n ) ++ "Oraculo negativo: " ++ (imprimirOraculo oneg n+1)  
 
-persistir :: Maybe Oraculo -> String                             
-persistir Nothing _  = putStrLn " Tratando de guardar un Oraculo vacio " 
-persistir ( Just orc ) name = do handle <- openFile (name WriteMode) 
-                                 hPutStr handle ( imprimirOraculo orc 0 )
-                                 
-                                 
-
+persistir :: Maybe Oraculo -> IO ()                             
+persistir Nothing        = putStrLn "Tratando de guardar un oraculo vacio." 
+persistir (Just oraculo) = do 
+  putStr "Introduzca el nombre del archivo en donde\nse guardara el oraculo: "
+  filename <- getLine
+  writeFile filename (show oraculo)
+  return ()
+	 
+cargar :: IO (Maybe Oraculo)
+cargar = do 
+  putStr "Introduzca el nombre del archivo en donde\nse encuentra el oraculo: "
+  filename <- getLine
+  existe <- doesFileExist filename
+  if existe then do
+    oraculo <- readFile filename
+    return (readMaybe oraculo)
+  else do
+    putStrLn "El archivo no existe."
+    return (Nothing)
+                             
 obtenerPosicion :: [(Bool,String)] -> [(Bool,String)] -> Int   
 obtenerPosicion (x:xs) (y:ys) =  if ( snd x == snd y ) 
                                      then 1 + obtenerPosicion xs ys 
