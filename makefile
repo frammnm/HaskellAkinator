@@ -1,4 +1,4 @@
 all : 
 	haskell-compiler Haskinator.hs
 clean : 
-	rm -rf *.o *.hi 
+	rm -rf *.o *.hi Haskinator  

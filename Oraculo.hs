@@ -18,7 +18,7 @@ module Oraculo
 
 -- Tipo de datos Oraculo.
 data Oraculo = Prediccion String | Pregunta String Oraculo Oraculo
-	deriving (Show,Read)
+	deriving (Show,Read,Eq)
 
 -- Funciones de construccion:	
 crearPrediccion :: String -> Oraculo
