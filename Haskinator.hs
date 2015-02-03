@@ -96,7 +96,7 @@ cargar = do putStr "Introduzca el nombre del archivo en donde\nse encuentra el o
               do oraculo <- readFile filename
                  let resp = readMaybe oraculo
                  if resp == Nothing then
-                   do putStrLn "El el contenido del archivo no contiene un oraculo valido."
+                   do putStrLn "El contenido del archivo no contiene un oraculo valido."
                       return Nothing
                  else return resp
             else do putStrLn "El archivo no existe."
