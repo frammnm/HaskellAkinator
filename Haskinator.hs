@@ -7,6 +7,8 @@
 
 import Data.Char
 import System.IO
+import Text.Read (readMaybe)
+import System.directory (doesFileExist)
 import Data.Maybe
 import Control.Monad
 import Oraculo     
