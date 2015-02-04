@@ -174,7 +174,9 @@ menu oraculoPrincipal = do
     "6" -> do putStrLn "Consultando estadisticas ..\n" 
               resp <- consultarEstadisticas oraculoPrincipal  
               putStr "Estadisticas (Min,Max,Promedio): "
-              print resp 
+              if resp == (-1,-1,-1.0) then
+                putStrLn "El oraculo esta vacio."
+              else print resp
               putStrLn "" 
               menu oraculoPrincipal
     "7" -> do putStrLn "Saliendo .. \n"
