@@ -5,9 +5,11 @@
 --    - Francisco Martinez 09-10502
 --    - Gabriel Alvarez    09-10029
 
+module Haskinator (main) where
+
 import System.IO
 import System.Directory (doesFileExist)
-import Oraculo     
+import Oraculo
 
 -- Funcion que devuelve un oraculo vacio.
 crearOraculo :: IO (Maybe Oraculo) 
